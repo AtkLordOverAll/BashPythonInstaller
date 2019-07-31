@@ -10,7 +10,7 @@ INSTALLS=$(grep -vf tmp.txt reqs.txt | tr "\n" " ")
 if [ ${#INSTALLS} -gt 1 ]; then
     echo "Apt update"
     sudo apt-get update > /dev/null
-    sudo apt-get install $INSTALLS -y # > /dev/null
+    sudo apt-get install $INSTALLS -y > /dev/null
     sudo apt-mark auto $INSTALLS
 else
     echo "You have all the requirements; awesome!"
