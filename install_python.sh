@@ -28,8 +28,8 @@ echo "Installing"
 sudo make altinstall -j $CORECOUNT >> python.log 2>&1
 echo "Cleaning up"
 cd ..
-rm Python.tar.xz
-sudo rm -r Python
+rm Python.tar.xz tmp.txt
+rm -r Python-*/
 echo "Removing build requirements"
 sudo apt-get autoremove > /dev/null
 sudo apt-get clean > /dev/null
