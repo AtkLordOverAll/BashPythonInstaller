@@ -16,8 +16,8 @@ else
     echo "You have all the requirements; awesome!"
 fi
 echo "Downloading and extracting Python"
-wget -O Python.tar.xz $1
-tar xf ./Python.tar.xz
+FILENAME=$(wget --server-response -q $1 2>&1 | grep "Content-Disposition:" | tail -1 | awk 'match($0, /filename=(.+)/, f){ print f[1] }')
+tar xf $FILENAME
 cd Python-*/
 echo "Configuring"
 ./configure --enable-optimizations > python.log 2>&1
@@ -28,8 +28,8 @@ echo "Installing"
 sudo make altinstall -j $CORECOUNT >> python.log 2>&1
 echo "Cleaning up"
 cd ..
-rm Python.tar.xz tmp.txt
-rm -r Python-*/
+rm $FILENAME.tar.* tmp.txt
+rm -r $FILENAME/
 echo "Removing build requirements"
 sudo apt-get autoremove > /dev/null
 sudo apt-get clean > /dev/null
