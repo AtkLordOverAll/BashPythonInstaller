@@ -10,26 +10,26 @@ INSTALLS=$(grep -vf tmp.txt reqs.txt | tr "\n" " ")
 if [ ${#INSTALLS} -gt 1 ]; then
     echo "Apt update"
     sudo apt-get update > /dev/null
-    sudo apt-get install $INSTALLS -y > /dev/null
-    sudo apt-mark auto $INSTALLS
+    sudo apt-get install "$INSTALLS" -y > /dev/null
+    sudo apt-mark auto "$INSTALLS"
 else
     echo "You have all the requirements; awesome!"
 fi
 echo "Downloading and extracting Python"
-FILENAME=$(basename $1 | sed "s/\.tar\..z$//")
-wget -qO- $1 | tar xJ
-cd $FILENAME
+FILENAME=$(basename "$1" | sed "s/\.tar\..z$//")
+wget -qO- "$1" | tar xJ
+cd "$FILENAME"
 echo "Configuring"
 ./configure --enable-optimizations > python.log 2>&1
 CORECOUNT=$(grep -c ^processor /proc/cpuinfo)
 echo "Building"
-make -j $CORECOUNT >> python.log 2>&1
+make -j "$CORECOUNT" >> python.log 2>&1
 echo "Installing"
-sudo make altinstall -j $CORECOUNT >> python.log 2>&1
+sudo make altinstall -j "$CORECOUNT" >> python.log 2>&1
 echo "Cleaning up"
 cd ..
 rm tmp.txt
-rm -r $FILENAME
+rm -r "$FILENAME"
 echo "Removing build requirements"
 sudo apt-get autoremove > /dev/null
 sudo apt-get clean > /dev/null
