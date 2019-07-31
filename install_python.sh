@@ -17,7 +17,7 @@ else
 fi
 echo "Downloading and extracting Python"
 FILENAME=$(basename $1 | sed "s/.......$//") # remove last 7 characters to get rid of the extension
-wget -qO- $1 | tar x
+wget -qO- $1 | tar xJ
 cd $FILENAME
 echo "Configuring"
 ./configure --enable-optimizations > python.log 2>&1
