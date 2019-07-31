@@ -1,7 +1,7 @@
 # Bash Python Installer
 One command to install Python!
 
-Yes this program will download a file from the internet and execute code from within it, exercise caution! Theoretically if you could pass my expression to check for a valid URL and suppsoing you had a certain archive layout and file within it you could execute malicious code. It's __not__ my responsibility if you bugger yourself doing this.
+Yes this program will download a file from the internet and execute code from within it, exercise caution! Theoretically if you could pass my expression to check for a valid URL and supposing you had a certain archive layout and file within it you could execute malicious code. It's __not__ my responsibility if you bugger yourself as a result of this.
 
 ## Recommended usage
 Download and extract (or just clone) and run:
