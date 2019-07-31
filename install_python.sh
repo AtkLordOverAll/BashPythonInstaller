@@ -16,9 +16,9 @@ else
     echo "You have all the requirements; awesome!"
 fi
 echo "Downloading and extracting Python"
-FILENAME=$(wget --server-response -q $1 2>&1 | grep "Content-Disposition:" | tail -1 | awk 'match($0, /filename=(.+)/, f){ print f[1] }')
-tar xf $FILENAME
-cd Python-*/
+FILENAME=$(basename $1 | sed "s/.......$//") # remove last 7 characters to get rid of the extension
+wget -qO- $1 | tar x
+cd $FILENAME
 echo "Configuring"
 ./configure --enable-optimizations > python.log 2>&1
 CORECOUNT=$(grep -c ^processor /proc/cpuinfo)
@@ -28,8 +28,8 @@ echo "Installing"
 sudo make altinstall -j $CORECOUNT >> python.log 2>&1
 echo "Cleaning up"
 cd ..
-rm $FILENAME.tar.* tmp.txt
-rm -r $FILENAME/
+rm tmp.txt
+rm -r $FILENAME
 echo "Removing build requirements"
 sudo apt-get autoremove > /dev/null
 sudo apt-get clean > /dev/null
