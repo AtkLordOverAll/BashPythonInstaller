@@ -11,3 +11,4 @@ libbz2-dev
 libexpat1-dev
 liblzma-dev
 zlib1g-dev
+libffi-dev
