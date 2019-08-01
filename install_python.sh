@@ -20,12 +20,12 @@ FILENAME=$(basename "$1" | sed "s/\.tar\..z$//")
 wget -qO- "$1" | tar xJ
 cd "$FILENAME"
 echo "Configuring"
-./configure --enable-optimizations > python.log 2>&1
+./configure --enable-optimizations > ../python.log 2>&1
 CORECOUNT=$(grep -c ^processor /proc/cpuinfo)
 echo "Building"
-make -j "$CORECOUNT" >> python.log 2>&1
+make -j "$CORECOUNT" >> ../python.log 2>&1
 echo "Installing"
-sudo make altinstall -j "$CORECOUNT" >> python.log 2>&1
+sudo make altinstall -j "$CORECOUNT" >> ../python.log 2>&1
 echo "Cleaning up"
 cd ..
 rm tmp.txt
