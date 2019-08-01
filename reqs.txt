@@ -12,3 +12,5 @@ libexpat1-dev
 liblzma-dev
 zlib1g-dev
 libffi-dev
+libnss3-dev
+wget
